@@ -47,9 +47,15 @@ folderInput.addEventListener(
         const coverFile =
             files.find(file =>
 
-                file.name === "cover.jpg"
+                file.name.toLowerCase() === "cover.jpg"
                 ||
-                file.name === "cover.png"
+                file.name.toLowerCase() === "cover.png"
+                ||
+                file.name.toLowerCase() === "cover.jpeg"
+                ||
+                file.name.toLowerCase() === "cover.webp"
+
+
 
             );
 
