@@ -1,8 +1,12 @@
 const library =
-    document.getElementById("library");
+    document.getElementById(
+        "library"
+    );
 
 const folderInput =
-    document.getElementById("folderInput");
+    document.getElementById(
+        "folderInput"
+    );
 
 /* 폴더 선택 */
 
@@ -11,9 +15,10 @@ function openFolderPicker() {
     folderInput.value = "";
 
     folderInput.click();
+
 }
 
-/* 폴더 업로드 */
+/* 업로드 */
 
 folderInput.addEventListener(
     "change",
@@ -22,18 +27,18 @@ folderInput.addEventListener(
         const files =
             [...e.target.files];
 
-        if (files.length === 0) return;
-
-        // txt 추출
+        if (files.length === 0)
+            return;
 
         const txtFiles =
             files.filter(file =>
-                file.name.endsWith(".txt")
+                file.name.endsWith(
+                    ".txt"
+                )
             );
 
-        if (txtFiles.length === 0) return;
-
-        // 작품명
+        if (txtFiles.length === 0)
+            return;
 
         const firstPath =
             txtFiles[0]
@@ -42,61 +47,28 @@ folderInput.addEventListener(
         const bookName =
             firstPath.split("/")[0];
 
-        // 표지 찾기
-
-        const coverFile =
-            files.find(file =>
-
-                file.name.toLowerCase() === "cover.jpg"
-                ||
-                file.name.toLowerCase() === "cover.png"
-                ||
-                file.name.toLowerCase() === "cover.jpeg"
-                ||
-                file.name.toLowerCase() === "cover.webp"
-
-
-
-            );
-
-        let coverURL = "";
-
-        if (coverFile) {
-
-            coverURL =
-                URL.createObjectURL(
-                    coverFile
-                );
-        }
-
-        // 카드 생성
-
         const card =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         card.className =
             "book-card";
 
         card.innerHTML = `
-      <img
-        class="book-cover"
-        src="${coverURL || ""}"
-      >
 
-      <div class="book-info">
+            <div class="book-info">
 
-        <div class="book-title">
-          ${bookName}
-        </div>
+                <div class="book-title">
+                    ${bookName}
+                </div>
 
-        <div class="book-count">
-          ${txtFiles.length}화
-        </div>
+                <div class="book-count">
+                    ${txtFiles.length}화
+                </div>
 
-      </div>
-    `;
-
-        // 클릭
+            </div>
+        `;
 
         card.onclick = () => {
 
@@ -104,6 +76,7 @@ folderInput.addEventListener(
                 bookName,
                 txtFiles
             );
+
         };
 
         library.appendChild(card);
@@ -126,23 +99,24 @@ function openBook(
     });
 
     library.innerHTML = `
-    <div class="chapter-page">
 
-      <button
-        class="back-btn"
-        onclick="location.reload()"
-      >
-        ← 뒤로
-      </button>
+        <div class="chapter-page">
 
-      <h2 class="chapter-title">
-        ${title}
-      </h2>
+            <button
+                class="back-btn"
+                onclick="location.reload()"
+            >
+                ← 뒤로
+            </button>
 
-      <div id="chapterList"></div>
+            <h2 class="chapter-title">
+                ${title}
+            </h2>
 
-    </div>
-  `;
+            <div id="chapterList"></div>
+
+        </div>
+    `;
 
     const chapterList =
         document.getElementById(
@@ -152,7 +126,9 @@ function openBook(
     files.forEach((file, index) => {
 
         const item =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         item.className =
             "chapter-item";
@@ -172,16 +148,18 @@ function openBook(
                     index,
                     text
                 );
+
             };
 
-        chapterList
-            .appendChild(item);
+        chapterList.appendChild(
+            item
+        );
 
     });
 
 }
 
-/* 리더 설정값 */
+/* 설정값 */
 
 let fontSize = 18;
 
@@ -189,11 +167,12 @@ let lineHeight = 2.1;
 
 let readerWidth = 760;
 
-let backgroundColor = "#f4efe6";
+let backgroundColor =
+    "#ffffff";
 
 let uiVisible = false;
 
-/* 리더 열기 */
+/* 리더 */
 
 function openReader(
     bookTitle,
@@ -212,180 +191,253 @@ function openReader(
 
     document.body.innerHTML = `
 
-    <!-- 상단 UI -->
+        <div
+            class="reader-top hidden-ui"
+            id="readerTop"
+        >
 
-    <div
-      class="reader-top hidden-ui"
-      id="readerTop"
-    >
+            <button
+                class="back-btn"
+                onclick="location.reload()"
+            >
+                ← 뒤로
+            </button>
 
-      <button
-        class="back-btn"
-        onclick="location.reload()"
-      >
-        ← 뒤로
-      </button>
-
-      <button
-        class="setting-btn"
-        onclick="toggleSettings()"
-      >
-        Aa
-      </button>
-
-    </div>
-
-    <!-- 설정창 -->
-
-    <div
-      class="settings-panel"
-      id="settingsPanel"
-    >
-
-      <div class="setting-row">
-
-        <span>글자 크기</span>
-
-        <div>
-
-          <button onclick="fontDown()">-</button>
-
-          <button onclick="fontUp()">+</button>
+            <button
+                class="setting-btn"
+                onclick="toggleSettings()"
+            >
+                Aa
+            </button>
 
         </div>
 
-      </div>
+        <div
+            class="settings-panel"
+            id="settingsPanel"
+        >
 
-      <div class="setting-row">
+            <div class="setting-row">
 
-        <span>줄 간격</span>
+                <span>글자</span>
 
-        <div>
+                <div>
 
-          <button onclick="lineDown()">-</button>
+                    <button onclick="fontDown()">
+                        -
+                    </button>
 
-          <button onclick="lineUp()">+</button>
+                    <button onclick="fontUp()">
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="setting-row">
+
+                <span>줄 간격</span>
+
+                <div>
+
+                    <button onclick="lineDown()">
+                        -
+                    </button>
+
+                    <button onclick="lineUp()">
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="setting-row">
+
+                <span>너비</span>
+
+                <div>
+
+                    <button onclick="widthDown()">
+                        -
+                    </button>
+
+                    <button onclick="widthUp()">
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="setting-row background-row">
+
+                <span>배경</span>
+
+                <div class="color-buttons">
+
+                    <button
+                        class="
+                            color-btn
+                            white-theme
+                        "
+                        onclick="
+                            changeBackground(
+                                '#ffffff'
+                            )
+                        "
+                    ></button>
+
+                    <button
+                        class="
+                            color-btn
+                            green-theme
+                        "
+                        onclick="
+                            changeBackground(
+                                '#c3dda8'
+                            )
+                        "
+                    ></button>
+
+                </div>
+
+            </div>
 
         </div>
 
-      </div>
-
-      <div class="setting-row">
-
-        <span>문단 너비</span>
-
-        <div>
-
-          <button onclick="widthDown()">-</button>
-
-          <button onclick="widthUp()">+</button>
-
-        </div>
-
-      </div>
-
-      <div class="setting-row">
-
-        <span>배경 색</span>
-
-        <div class="color-buttons">
-
-          <button
-            class="color-btn white-theme"
-            onclick="changeBackground('#ffffff')"
-          ></button>
-
-          <button
-            class="color-btn green-theme"
-            onclick="changeBackground('#c3dda8')"
-          ></button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- 리더 -->
+        <div
+            class="reader"
+            id="reader"
+        >
+<div
+        class="touch-zone left-zone"
+        onclick="
+            askMoveChapter(
+                ${currentIndex - 1}
+            )
+        "
+    ></div>
 
     <div
-      class="reader"
-      id="reader"
-      onclick="toggleReaderUI()"
-    >
-
-      <div class="text-content">
-        ${formattedText}
-      </div>
-
-    </div>
-
-    <!-- 하단 UI -->
+        class="touch-zone right-zone"
+        onclick="
+            askMoveChapter(
+                ${currentIndex + 1}
+            )
+        "
+    ></div>
 
     <div
-      class="reader-bottom hidden-ui"
-      id="readerBottom"
+    class="text-content"
+    onclick="toggleReaderUI()"
+>
+
+    ${formattedText}
+
+</div>
+
+${currentIndex !==
+            files.length - 1
+
+            ?
+
+            `
+
+    <button
+        class="next-chapter-btn"
+        onclick="
+            moveChapter(
+                ${currentIndex + 1}
+            )
+        "
     >
 
-      <button
+        다음 화 보기 →
+
+    </button>
+
+    `
+
+            :
+
+            ""
+        }
+
+</div>
+
+<div
+    class="reader-bottom hidden-ui"
+    id="readerBottom"
+>
+
+    <button
         class="nav-arrow"
         onclick="
-          moveChapter(
-            ${currentIndex - 1}
-          )
+            moveChapter(
+                ${currentIndex - 1}
+            )
         "
         ${currentIndex === 0
             ? "disabled"
             : ""
         }
-      >
+    >
         ←
-      </button>
+    </button>
 
-      <div class="progress-area">
+    <div class="progress-area">
 
         <div
-          class="progress-text"
-          id="progressText"
+            class="progress-text"
+            id="progressText"
         >
-          0%
+            0%
         </div>
 
-        <div class="progress-bar">
+        <div
+            class="progress-bar"
+            id="progressBar"
+        >
 
-          <div
-            class="progress-fill"
-            id="progressFill"
-          ></div>
+            <div
+                class="progress-fill"
+                id="progressFill"
+            ></div>
 
         </div>
 
-      </div>
+    </div>
 
-      <button
+    <button
         class="nav-arrow"
         onclick="
-          moveChapter(
-            ${currentIndex + 1}
-          )
+            moveChapter(
+                ${currentIndex + 1}
+            )
         "
         ${currentIndex ===
             files.length - 1
             ? "disabled"
             : ""
         }
-      >
+    >
         →
-      </button>
+    </button>
 
-    </div>
-  `;
+
+        </div>
+    `;
 
     window.currentBook =
         bookTitle;
 
     window.currentFiles =
         files;
+
+    window.currentIndex =
+        currentIndex;
 
     updateReaderStyle();
 
@@ -398,8 +450,8 @@ function openReader(
 
 }
 
-/* 다음 화 이동 */
-
+/* 화 이동 */
+/* 화 이동 확인 */
 async function moveChapter(
     index
 ) {
@@ -417,6 +469,14 @@ async function moveChapter(
         text
     );
 
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "instant"
+
+    });
+
 }
 
 /* 설정창 */
@@ -428,11 +488,13 @@ function toggleSettings() {
             "settingsPanel"
         );
 
-    panel.classList.toggle("open");
+    panel.classList.toggle(
+        "open"
+    );
 
 }
 
-/* 글자 크기 */
+/* 글자 */
 
 function fontUp() {
 
@@ -450,7 +512,7 @@ function fontDown() {
 
 }
 
-/* 줄 간격 */
+/* 줄 */
 
 function lineUp() {
 
@@ -486,9 +548,11 @@ function widthDown() {
 
 }
 
-/* 배경색 */
+/* 배경 */
 
-function changeBackground(color) {
+function changeBackground(
+    color
+) {
 
     backgroundColor = color;
 
@@ -496,7 +560,7 @@ function changeBackground(color) {
 
 }
 
-/* 스타일 적용 */
+/* 스타일 */
 
 function updateReaderStyle() {
 
@@ -522,31 +586,9 @@ function updateReaderStyle() {
     document.body.style.background =
         backgroundColor;
 
-    const top =
-        document.getElementById(
-            "readerTop"
-        );
-
-    if (top) {
-
-        top.style.background =
-            backgroundColor;
-    }
-
-    const bottom =
-        document.getElementById(
-            "readerBottom"
-        );
-
-    if (bottom) {
-
-        bottom.style.background =
-            backgroundColor;
-    }
-
 }
 
-/* UI 표시 */
+/* UI */
 
 function toggleReaderUI() {
 
@@ -560,6 +602,11 @@ function toggleReaderUI() {
     const bottom =
         document.getElementById(
             "readerBottom"
+        );
+
+    const panel =
+        document.getElementById(
+            "settingsPanel"
         );
 
     if (uiVisible) {
@@ -582,6 +629,14 @@ function toggleReaderUI() {
             "hidden-ui"
         );
 
+        if (panel) {
+
+            panel.classList.remove(
+                "open"
+            );
+
+        }
+
     }
 
 }
@@ -601,8 +656,10 @@ function updateProgress() {
         Math.min(
             100,
             Math.round(
-                (scrollTop / docHeight)
-                * 100
+                (
+                    scrollTop
+                    / docHeight
+                ) * 100
             )
         );
 
@@ -620,12 +677,196 @@ function updateProgress() {
 
         text.textContent =
             progress + "%";
+
     }
 
     if (fill) {
 
         fill.style.width =
             progress + "%";
+
     }
 
 }
+
+/* 검색 */
+
+document.addEventListener(
+    "input",
+    (e) => {
+
+        if (
+            e.target.id
+            !== "searchInput"
+        ) return;
+
+        const keyword =
+            e.target.value
+                .toLowerCase();
+
+        const cards =
+            document.querySelectorAll(
+                ".book-card"
+            );
+
+        cards.forEach(card => {
+
+            const title =
+                card
+                    .querySelector(
+                        ".book-title"
+                    )
+                    .textContent
+                    .toLowerCase();
+
+            if (
+                title.includes(
+                    keyword
+                )
+            ) {
+
+                card.style.display =
+                    "flex";
+
+            } else {
+
+                card.style.display =
+                    "none";
+
+            }
+
+        });
+
+    }
+);
+
+/* 진행률 클릭 이동 */
+
+document.addEventListener(
+    "click",
+    (e) => {
+
+        const bar =
+            document.getElementById(
+                "progressBar"
+            );
+
+        if (!bar) return;
+
+        if (
+            !bar.contains(
+                e.target
+            )
+        ) return;
+
+        const rect =
+            bar.getBoundingClientRect();
+
+        const x =
+            e.clientX - rect.left;
+
+        const ratio =
+            x / rect.width;
+
+        const moveY =
+
+            (
+                document.body.scrollHeight
+                - window.innerHeight
+            )
+
+            * ratio;
+
+        window.scrollTo({
+
+            top: moveY,
+
+        });
+
+    }
+);
+
+let draggingProgress =
+    false;
+
+document.addEventListener(
+    "pointerdown",
+    (e) => {
+
+        const bar =
+            document.getElementById(
+                "progressBar"
+            );
+
+        if (
+            e.target === bar
+        ) {
+
+            draggingProgress =
+                true;
+
+        }
+
+    }
+);
+
+document.addEventListener(
+    "pointermove",
+    (e) => {
+
+        if (
+            !draggingProgress
+        ) return;
+
+        const bar =
+            document.getElementById(
+                "progressBar"
+            );
+
+        if (!bar) return;
+
+        const rect =
+            bar.getBoundingClientRect();
+
+        let x =
+            e.clientX - rect.left;
+
+        x =
+            Math.max(
+                0,
+                Math.min(
+                    rect.width,
+                    x
+                )
+            );
+
+        const ratio =
+            x / rect.width;
+
+        const moveY =
+
+            (
+                document.body.scrollHeight
+                - window.innerHeight
+            )
+
+            * ratio;
+
+        window.scrollTo({
+
+            top: moveY
+
+        });
+
+    }
+);
+
+document.addEventListener(
+    "pointerup",
+    () => {
+
+        draggingProgress =
+            false;
+
+    }
+);

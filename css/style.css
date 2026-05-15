@@ -5,20 +5,11 @@
 }
 
 body {
-    background: #f7f7f7;
+    background: #ffffff;
 
     color: #222;
 
     font-family: sans-serif;
-}
-
-
-.white-theme {
-    background: #ffffff;
-}
-
-.green-theme {
-    background: #c3dda8;
 }
 
 /* 상단 */
@@ -35,11 +26,33 @@ body {
     padding:
         22px 20px 18px;
 
-    border-bottom: 1px solid #eee;
+    border-bottom:
+        1px solid #eee;
 }
 
 .top-bar h1 {
     font-size: 28px;
+}
+
+/* 검색 */
+
+#searchInput {
+    width: 100%;
+
+    margin-top: 16px;
+
+    padding:
+        14px 16px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #f3f3f3;
+
+    font-size: 16px;
+
+    outline: none;
 }
 
 /* 라이브러리 */
@@ -54,13 +67,11 @@ body {
 .book-card {
     display: flex;
 
-    gap: 15px;
-
     background: white;
 
     border-radius: 18px;
 
-    padding: 14px;
+    padding: 18px;
 
     margin-bottom: 18px;
 
@@ -76,31 +87,10 @@ body {
     transform: scale(0.98);
 }
 
-/* 표지 */
-
-.book-cover {
-    width: 80px;
-    height: 120px;
-
-    border-radius: 12px;
-
-    background: #ddd;
-
-    object-fit: cover;
-
-    flex-shrink: 0;
-}
-
 /* 정보 */
 
 .book-info {
     flex: 1;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
 }
 
 .book-title {
@@ -150,7 +140,7 @@ body {
     transform: scale(0.95);
 }
 
-/* 챕터 화면 */
+/* 챕터 */
 
 .chapter-page {
     padding:
@@ -175,21 +165,7 @@ body {
     font-size: 16px;
 }
 
-/* 리더 */
-
-.reader-header {
-    position: sticky;
-
-    top: 0;
-
-    z-index: 100;
-
-    background: #f4efe6;
-
-    padding: 20px;
-
-    border-bottom: 1px solid #ddd;
-}
+/* 버튼 */
 
 .back-btn {
     border: none;
@@ -201,6 +177,8 @@ body {
     cursor: pointer;
 }
 
+/* 리더 */
+
 .reader {
     max-width: 760px;
 
@@ -209,7 +187,7 @@ body {
     padding:
         40px 24px 120px;
 
-    background: #f4efe6;
+    background: #ffffff;
 
     font-size: 18px;
 
@@ -218,141 +196,11 @@ body {
     letter-spacing: 0.02em;
 }
 
-.reader p {
-    margin-bottom: 1.7em;
+.text-content {
+    word-break: keep-all;
 }
 
-
-/* 리더 상단 */
-
-.reader-header {
-    position: sticky;
-
-    top: 0;
-
-    z-index: 999;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    background: #f4efe6;
-
-    padding: 18px 20px;
-
-    border-bottom: 1px solid #ddd;
-}
-
-/* 설정 버튼 */
-
-.setting-btn {
-    border: none;
-
-    background: white;
-
-    border-radius: 10px;
-
-    padding:
-        8px 14px;
-
-    cursor: pointer;
-}
-
-/* 설정창 */
-
-.settings-panel {
-    position: fixed;
-
-    top: 70px;
-    right: 20px;
-
-    width: 260px;
-
-    background: white;
-
-    border-radius: 16px;
-
-    padding: 18px;
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.12);
-
-    display: none;
-
-    z-index: 1000;
-}
-
-.settings-panel.open {
-    display: block;
-}
-
-.setting-row {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 18px;
-}
-
-.setting-row button {
-    width: 34px;
-    height: 34px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #f1f1f1;
-
-    cursor: pointer;
-}
-
-
-
-/* 화 이동 */
-
-.chapter-nav {
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 14px;
-
-    margin-top: 80px;
-}
-
-.chapter-nav button {
-    flex: 1;
-
-    border: none;
-
-    border-radius: 14px;
-
-    padding: 18px;
-
-    background: white;
-
-    cursor: pointer;
-
-    font-size: 16px;
-}
-
-
-
-
-/* UI 숨김 */
-
-.hidden-ui {
-    opacity: 0;
-
-    pointer-events: none;
-}
-
-/* 상단 */
+/* 상단 UI */
 
 .reader-top {
     position: fixed;
@@ -372,16 +220,18 @@ body {
         18px 20px;
 
     background:
-        rgba(244, 239, 230, 0.96);
+        rgba(0, 0, 0, 0.7);
 
     backdrop-filter: blur(10px);
+
+    color: white;
 
     z-index: 1000;
 
     transition: 0.25s;
 }
 
-/* 하단 */
+/* 하단 UI */
 
 .reader-bottom {
     position: fixed;
@@ -401,13 +251,110 @@ body {
         16px 20px 24px;
 
     background:
-        rgba(244, 239, 230, 0.96);
+        rgba(0, 0, 0, 0.7);
 
     backdrop-filter: blur(10px);
+
+    color: white;
 
     z-index: 1000;
 
     transition: 0.25s;
+}
+
+/* 숨김 */
+
+.hidden-ui {
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+/* 설정 버튼 */
+
+.setting-btn {
+    border: none;
+
+    background:
+        rgba(255, 255, 255, 0.15);
+
+    color: white;
+
+    border-radius: 10px;
+
+    padding:
+        8px 14px;
+
+    cursor: pointer;
+}
+
+/* 설정창 */
+
+.settings-panel {
+    position: fixed;
+
+    top: 70px;
+    right: 20px;
+
+    width: 260px;
+
+    background:
+        rgba(0, 0, 0, 0.7);
+
+    color: white;
+
+    border-radius: 16px;
+
+    padding: 18px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.12);
+
+    display: none;
+
+    z-index: 1000;
+
+    backdrop-filter: blur(10px);
+}
+
+.settings-panel.open {
+    display: block;
+}
+
+/* 설정 줄 */
+
+.back-btn {
+    color: white;
+}
+
+.setting-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+.setting-row button {
+    width: 36px;
+    height: 36px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255, 255, 255, 0.15);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    font-weight: bold;
 }
 
 /* 화살표 */
@@ -443,8 +390,6 @@ body {
     font-size: 14px;
 }
 
-/* 바 */
-
 .progress-bar {
     width: 100%;
 
@@ -467,47 +412,115 @@ body {
     transition: 0.15s;
 }
 
-
-
-.text-content {
-    word-break: keep-all;
-}
-
-
+/* 배경 버튼 */
 .color-buttons {
     display: flex;
+
+    align-items: center;
+
     gap: 10px;
 }
 
 .color-btn {
-    width: 32px;
-    height: 32px;
+    width: 32px !important;
+    height: 32px !important;
 
-    border-radius: 50%;
+    min-width: 32px;
+
+    border-radius: 50% !important;
 
     cursor: pointer;
 
-    border: 2px solid #999;
+    flex-shrink: 0;
+
+    padding: 0 !important;
+}
+
+.white-theme {
+    background: #ffffff !important;
+
+    border:
+        2px solid #bbb !important;
+}
+
+.green-theme {
+    background: #c3dda8 !important;
+
+    border:
+        2px solid #8cab6d !important;
+}
+
+.background-row {
+    align-items: center;
+}
+
+
+
+
+/* 좌우 터치 영역 */
+
+.touch-zone {
+    position: fixed;
+
+    top: 0;
+
+    width: 22%;
+
+    height: 100%;
+
+    z-index: 5;
+}
+
+.left-zone {
+    left: 0;
+}
+
+.right-zone {
+    right: 0;
+}
+
+/* 진행률 드래그 가능 */
+
+.progress-bar {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+.next-chapter-btn {
+
+    display: block;
+
+    margin:
+        80px auto 40px;
+
+    padding:
+        18px 28px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: #111;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
 
     transition: 0.2s;
 }
 
-.color-btn:hover {
-    transform: scale(1.08);
-}
+.next-chapter-btn:active {
 
-/* 흰색 */
-
-.white-theme {
-    background: #ffffff;
-
-    border-color: #bbb;
-}
-
-/* 연두색 */
-
-.green-theme {
-    background: #c3dda8;
-
-    border-color: #8cab6d;
+    transform: scale(0.97);
 }

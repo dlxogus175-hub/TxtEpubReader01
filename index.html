@@ -2,55 +2,34 @@
 <html lang="ko">
 
 <head>
-
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>My Library</title>
-
     <!-- PWA -->
-
     <link rel="manifest" href="json/manifest.json" />
-
     <meta name="theme-color" content="#ffffff" />
-
     <!-- CSS -->
-
     <link rel="stylesheet" href="css/style.css" />
-
 </head>
 
 <body>
-
     <!-- 상단 -->
-
     <header class="top-bar">
-
         <h1>내 서재</h1>
-
+        <input type="text" id="searchInput" placeholder="작품 검색" />
     </header>
 
     <!-- 작품 리스트 -->
-
-    <main class="library" id="library">
-
-    </main>
-
+    <main class="library" id="library"></main>
     <!-- 플러스 버튼 -->
-
     <button class="add-btn" onclick="openFolderPicker()">
         +
     </button>
 
     <!-- 폴더 업로드 -->
-
     <input type="file" id="folderInput" webkitdirectory multiple hidden />
-
     <!-- JS -->
-
     <script src="js/script.js"></script>
-
 </body>
 
 </html>
