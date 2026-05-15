@@ -2,107 +2,54 @@
 <html lang="ko">
 
 <head>
+
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TXT Reader</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./js/jquery-1.12.4.js">
-    <link rel="stylesheet" href="./js/custom.js">
+
+    <title>My Library</title>
+
+    <!-- PWA -->
+
+    <link rel="manifest" href="json/manifest.json" />
+
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="css/style.css" />
+
 </head>
 
 <body>
 
-    <!-- 모바일 메뉴 버튼 -->
-    <button class="mobile-menu-btn" onclick="toggleSidebar()">
-        ☰
+    <!-- 상단 -->
+
+    <header class="top-bar">
+
+        <h1>내 서재</h1>
+
+    </header>
+
+    <!-- 작품 리스트 -->
+
+    <main class="library" id="library">
+
+    </main>
+
+    <!-- 플러스 버튼 -->
+
+    <button class="add-btn" onclick="openFolderPicker()">
+        +
     </button>
 
-    <!-- 사이드바 -->
-    <aside class="sidebar" id="sidebar">
-
-        <div class="sidebar-header">
-
-            <h2>내 서재</h2>
-
-            <!-- 작품 추가 -->
-            <button class="add-btn" onclick="openFolderPicker()">
-                +
-            </button>
-
-        </div>
-
-        <!-- 라이브러리 -->
-        <div class="library" id="library"></div>
-
-    </aside>
-
-    <!-- 메인 -->
-    <main class="viewer-area">
-
-        <!-- 툴바 -->
-        <div class="toolbar">
-
-            <button onclick="fontUp()">A+</button>
-
-            <button onclick="fontDown()">A-</button>
-
-            <button onclick="lineUp()">줄+</button>
-
-            <button onclick="lineDown()">줄-</button>
-
-            <button onclick="toggleDarkMode()">
-                🌙
-            </button>
-
-        </div>
-
-        <!-- 리더 -->
-        <div class="reader" id="reader">
-
-            <p>
-                + 버튼으로 작품 폴더를 추가하세요.
-            </p>
-
-        </div>
-
-    </main>
-
     <!-- 폴더 업로드 -->
+
     <input type="file" id="folderInput" webkitdirectory multiple hidden />
 
+    <!-- JS -->
 
-
-
-    </main>
-
-</body>
-
-</html>
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>TXT Reader</title>
-
-    <style>
-
-
-
-    </style>
-</head>
-
-<body>
-
-
-
+    <script src="js/script.js"></script>
 
 </body>
 
