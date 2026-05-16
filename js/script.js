@@ -1,12 +1,20 @@
-const library =
+const originalBody =
+    document.body.innerHTML;
+
+
+let library =
     document.getElementById(
         "library"
     );
 
-const folderInput =
+let folderInput =
     document.getElementById(
         "folderInput"
     );
+
+
+
+
 
 /* IndexedDB */
 
@@ -169,7 +177,16 @@ function createBookCard(
     card.className =
         "book-card";
 
+    card.draggable = true;
+
+    card.dataset.name =
+        bookName;
+
     card.innerHTML = `
+
+        <div class="drag-handle">
+            ☰
+        </div>
 
         <div class="book-info">
 
@@ -183,16 +200,67 @@ function createBookCard(
 
         </div>
 
+        <button
+            class="library-delete-btn"
+        >
+            삭제
+        </button>
+
     `;
 
-    card.onclick = () => {
+    /* 작품 열기 */
+
+    card.querySelector(
+        ".book-info"
+    ).onclick = () => {
 
         openBook(
             bookName,
             chapters,
             description
         );
+
     };
+
+    /* 삭제 */
+
+    card.querySelector(
+        ".library-delete-btn"
+    ).onclick = (e) => {
+
+        e.stopPropagation();
+
+        deleteBook(
+            bookName
+        );
+
+    };
+
+    /* 드래그 */
+
+    card.addEventListener(
+        "dragstart",
+        () => {
+
+            card.classList.add(
+                "dragging"
+            );
+
+        }
+    );
+
+    card.addEventListener(
+        "dragend",
+        () => {
+
+            card.classList.remove(
+                "dragging"
+            );
+
+            saveBookOrder();
+
+        }
+    );
 
     library.appendChild(card);
 
@@ -234,6 +302,8 @@ function saveBook(
 
 /* 작품 불러오기 */
 
+/* 작품 불러오기 */
+
 function loadBooks() {
 
     const tx =
@@ -253,6 +323,8 @@ function loadBooks() {
     request.onsuccess =
         () => {
 
+            library.innerHTML = "";
+
             request.result.forEach(
                 book => {
 
@@ -264,6 +336,8 @@ function loadBooks() {
 
                 }
             );
+
+            applyBookOrder();
 
         };
 
@@ -292,7 +366,7 @@ function openBook(
 
         <button
             class="back-library-btn"
-            onclick="location.reload()"
+            onclick="goLibrary()"
         >
             ← 뒤로
         </button>
@@ -1069,5 +1143,284 @@ function deleteBook(
     store.delete(bookName);
 
     location.reload();
+
+}
+
+
+
+
+
+
+
+/* 드래그 정렬 */
+
+library.addEventListener(
+    "dragover",
+    (e) => {
+
+        e.preventDefault();
+
+        const dragging =
+            document.querySelector(
+                ".dragging"
+            );
+
+        const cards =
+            [
+                ...document.querySelectorAll(
+                    ".book-card:not(.dragging)"
+                )
+            ];
+
+        const nextCard =
+            cards.find(card => {
+
+                const rect =
+                    card.getBoundingClientRect();
+
+                return (
+                    e.clientY
+                    <
+                    rect.top
+                    +
+                    rect.height / 2
+                );
+
+            });
+
+        if (nextCard) {
+
+            library.insertBefore(
+                dragging,
+                nextCard
+            );
+
+        } else {
+
+            library.appendChild(
+                dragging
+            );
+
+        }
+
+    }
+);
+
+/* 순서 저장 */
+
+function saveBookOrder() {
+
+    const order =
+        [
+            ...document.querySelectorAll(
+                ".book-card"
+            )
+        ].map(card =>
+
+            card.dataset.name
+
+        );
+
+    localStorage.setItem(
+        "bookOrder",
+        JSON.stringify(order)
+    );
+
+}
+
+/* 순서 적용 */
+
+function applyBookOrder() {
+
+    const order =
+        JSON.parse(
+            localStorage.getItem(
+                "bookOrder"
+            )
+        );
+
+    if (!order) return;
+
+    order.forEach(name => {
+
+        const card =
+            document.querySelector(
+                `.book-card[data-name="${name}"]`
+            );
+
+        if (card) {
+
+            library.appendChild(
+                card
+            );
+
+        }
+
+    });
+
+}
+
+
+
+
+
+/* 서재로 */
+
+function goLibrary() {
+
+    document.body.innerHTML =
+        originalBody;
+
+    /* DOM 다시 연결 */
+
+    library =
+        document.getElementById(
+            "library"
+        );
+
+    folderInput =
+        document.getElementById(
+            "folderInput"
+        );
+
+    /* 업로드 이벤트 다시 연결 */
+
+    folderInput.addEventListener(
+        "change",
+        async (e) => {
+
+            const files =
+                [...e.target.files];
+
+            if (
+                files.length === 0
+            ) return;
+
+            const txtFiles =
+                files.filter(file =>
+                    file.name.endsWith(
+                        ".txt"
+                    )
+                );
+
+            const infoFile =
+                txtFiles.find(file =>
+                    file.name === "info.txt"
+                );
+
+            let description = "";
+
+            if (infoFile) {
+
+                description =
+                    await infoFile.text();
+
+            }
+
+            if (
+                txtFiles.length === 0
+            ) return;
+
+            const firstPath =
+                txtFiles[0]
+                    .webkitRelativePath;
+
+            const bookName =
+                firstPath.split("/")[0];
+
+            const chapters = [];
+
+            const chapterFiles =
+                txtFiles.filter(file =>
+                    file.name !== "info.txt"
+                );
+
+            for (const file of chapterFiles) {
+
+                const text =
+                    await file.text();
+
+                chapters.push({
+
+                    name:
+                        file.name,
+
+                    text:
+                        text
+
+                });
+
+            }
+
+            saveBook(
+                bookName,
+                chapters,
+                description
+            );
+
+            createBookCard(
+                bookName,
+                chapters,
+                description
+            );
+
+        }
+    );
+
+    /* 드래그 다시 연결 */
+
+    library.addEventListener(
+        "dragover",
+        (e) => {
+
+            e.preventDefault();
+
+            const dragging =
+                document.querySelector(
+                    ".dragging"
+                );
+
+            const cards =
+                [
+                    ...document.querySelectorAll(
+                        ".book-card:not(.dragging)"
+                    )
+                ];
+
+            const nextCard =
+                cards.find(card => {
+
+                    const rect =
+                        card.getBoundingClientRect();
+
+                    return (
+                        e.clientY
+                        <
+                        rect.top
+                        +
+                        rect.height / 2
+                    );
+
+                });
+
+            if (nextCard) {
+
+                library.insertBefore(
+                    dragging,
+                    nextCard
+                );
+
+            } else {
+
+                library.appendChild(
+                    dragging
+                );
+
+            }
+
+        }
+    );
+
+    loadBooks();
 
 }

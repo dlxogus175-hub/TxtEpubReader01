@@ -132,25 +132,28 @@ body {
 
 .add-btn {
     position: fixed;
+    right: 24px;
+    bottom: 24px;
 
-    right: 22px;
-    top: 120px;
-
-    width: 64px;
-    height: 64px;
-
-    border: none;
+    width: 58px;
+    height: 58px;
 
     border-radius: 50%;
+    border: none;
 
-    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    color: #777;
+    font-size: 38px;
+    line-height: 1;
 
-    font-size: 42px;
+    padding: 0;
+
+    background: #fff;
 
     box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.15);
+        0 4px 14px rgba(0, 0, 0, 0.12);
 
     cursor: pointer;
 
@@ -642,4 +645,53 @@ body {
 .chapter-arrow {
     font-size: 30px;
     color: #999;
+}
+
+
+
+
+
+
+
+.book-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 18px;
+    border: 1px solid #f0f0f0;
+    transition: 0.2s;
+}
+
+.book-card:hover {
+    background: #fafafa;
+}
+
+.drag-handle {
+    font-size: 22px;
+    color: #999;
+    cursor: grab;
+    user-select: none;
+    font-weight: 400;
+}
+
+.book-info {
+    flex: 1;
+    cursor: pointer;
+}
+
+.library-delete-btn {
+    border: 1px solid #ffbdbd;
+    background: white;
+    color: #ff4d4d;
+    padding: 10px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dragging {
+    opacity: 0.4;
 }
