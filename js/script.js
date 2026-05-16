@@ -89,6 +89,20 @@ folderInput.addEventListener(
                 )
             );
 
+        const infoFile =
+            txtFiles.find(file =>
+                file.name === "info.txt"
+            );
+
+        let description = "";
+
+        if (infoFile) {
+
+            description =
+                await infoFile.text();
+
+        }
+
         if (
             txtFiles.length === 0
         ) return;
@@ -102,7 +116,12 @@ folderInput.addEventListener(
 
         const chapters = [];
 
-        for (const file of txtFiles) {
+        const chapterFiles =
+            txtFiles.filter(file =>
+                file.name !== "info.txt"
+            );
+
+        for (const file of chapterFiles) {
 
             const text =
                 await file.text();
@@ -121,12 +140,14 @@ folderInput.addEventListener(
 
         saveBook(
             bookName,
-            chapters
+            chapters,
+            description
         );
 
         createBookCard(
             bookName,
-            chapters
+            chapters,
+            description
         );
 
     }
@@ -136,7 +157,8 @@ folderInput.addEventListener(
 
 function createBookCard(
     bookName,
-    chapters
+    chapters,
+    description
 ) {
 
     const card =
@@ -167,9 +189,9 @@ function createBookCard(
 
         openBook(
             bookName,
-            chapters
+            chapters,
+            description
         );
-
     };
 
     library.appendChild(card);
@@ -180,7 +202,8 @@ function createBookCard(
 
 function saveBook(
     bookName,
-    chapters
+    chapters,
+    description
 ) {
 
     const tx =
@@ -200,7 +223,10 @@ function saveBook(
             bookName,
 
         chapters:
-            chapters
+            chapters,
+
+        description:
+            description
 
     });
 
@@ -232,7 +258,8 @@ function loadBooks() {
 
                     createBookCard(
                         book.name,
-                        book.chapters
+                        book.chapters,
+                        book.description
                     );
 
                 }
@@ -246,7 +273,8 @@ function loadBooks() {
 
 function openBook(
     title,
-    chapters
+    chapters,
+    description
 ) {
 
     chapters.sort((a, b) => {
@@ -258,22 +286,57 @@ function openBook(
 
     library.innerHTML = `
 
-        <div class="chapter-page">
+<div class="chapter-page">
 
-            <button
-                class="back-btn"
-                onclick="location.reload()"
-            >
-                ← 뒤로
-            </button>
+    <div class="chapter-top">
 
-            <h2 class="chapter-title">
-                ${title}
-            </h2>
+        <button
+            class="back-library-btn"
+            onclick="location.reload()"
+        >
+            ← 뒤로
+        </button>
 
-            <div id="chapterList"></div>
+        <button
+            class="delete-book-btn"
+            onclick="
+                deleteBook(
+                    '${title}'
+                )
+            "
+        >
+            삭제
+        </button>
+
+    </div>
+
+    <h2 class="chapter-title">
+        ${title}
+    </h2>
+
+    <div class="book-info-box">
+
+        <div class="book-info-title">
+            작품 소개
+        </div>
+
+        <div class="book-description">
+
+            ${description || "소개글 없음"}
 
         </div>
+
+    </div>
+
+    <div class="chapter-divider"></div>
+
+    <div class="chapter-list-title">
+        목차
+    </div>
+
+    <div id="chapterList"></div>
+
+    </div>
 
     `;
 
@@ -293,8 +356,17 @@ function openBook(
             item.className =
                 "chapter-item";
 
-            item.textContent =
-                chapter.name;
+            item.innerHTML = `
+
+            <span>
+            ${chapter.name}
+            </span>
+
+            <span class="chapter-arrow">
+            ›
+            </span>
+
+            `;
 
             item.onclick =
                 () => {
@@ -699,15 +771,7 @@ function toggleSettings() {
 
 }
 
-/* 글자 */
 
-function fontUp() {
-
-    fontSize += 2;
-
-    updateReaderStyle();
-
-}
 
 /* 글자 */
 
@@ -971,3 +1035,39 @@ document.addEventListener(
 
     }
 );
+
+
+
+
+
+
+
+/* 작품 삭제 함수 */
+
+function deleteBook(
+    bookName
+) {
+
+    const ok =
+        confirm(
+            "작품을 삭제할까요?"
+        );
+
+    if (!ok) return;
+
+    const tx =
+        db.transaction(
+            "books",
+            "readwrite"
+        );
+
+    const store =
+        tx.objectStore(
+            "books"
+        );
+
+    store.delete(bookName);
+
+    location.reload();
+
+}

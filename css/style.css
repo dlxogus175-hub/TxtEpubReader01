@@ -4,12 +4,19 @@
     box-sizing: border-box;
 }
 
+
 body {
     background: #ffffff;
 
     color: #222;
 
     font-family: sans-serif;
+}
+
+* {
+    font-family:
+        "Pretendard",
+        sans-serif;
 }
 
 /* 상단 */
@@ -106,6 +113,20 @@ body {
 
     font-size: 14px;
 }
+
+
+.book-description {
+
+    margin-bottom: 28px;
+
+    line-height: 1.8;
+
+    color: #666;
+
+    white-space: pre-wrap;
+
+}
+
 
 /* 플러스 버튼 */
 
@@ -523,4 +544,102 @@ body {
 .next-chapter-btn:active {
 
     transform: scale(0.97);
+}
+
+
+
+
+
+
+/* 작품삭제버튼css */
+
+.chapter-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.chapter-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.back-library-btn {
+    border: 1px solid #ddd;
+    background: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.delete-book-btn {
+    border: 1px solid #ffb4b4;
+    background: white;
+    color: #ff4d4d;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.chapter-title {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    line-height: 1.4;
+}
+
+.book-info-box {
+    border: 1px solid #e5e5e5;
+    border-radius: 20px;
+    padding: 35px;
+    background: #fafafa;
+}
+
+.book-info-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.book-description {
+    line-height: 2;
+    color: #555;
+    white-space: pre-wrap;
+    font-size: 17px;
+}
+
+.chapter-divider {
+    height: 1px;
+    background: #e5e5e5;
+    margin: 50px 0;
+}
+
+.chapter-list-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.chapter-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.chapter-item:hover {
+    background: #fafafa;
+}
+
+.chapter-arrow {
+    font-size: 30px;
+    color: #999;
 }
