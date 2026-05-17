@@ -695,3 +695,175 @@ body {
 .dragging {
     opacity: 0.4;
 }
+
+
+
+
+
+
+
+
+/* 모바일 최적화 */
+
+@media (max-width: 768px) {
+
+    body {
+
+        padding:
+            20px;
+
+    }
+
+    .book-card {
+
+        padding:
+            20px 18px;
+
+        gap:
+            14px;
+
+    }
+
+    .book-title {
+
+        font-size:
+            18px;
+
+        line-height:
+            1.4;
+
+        word-break:
+            keep-all;
+
+    }
+
+    .book-count {
+
+        font-size:
+            15px;
+
+    }
+
+    .drag-handle {
+
+        font-size:
+            24px;
+
+        min-width:
+            28px;
+
+    }
+
+    .library-delete-btn {
+
+        width:
+            74px;
+
+        height:
+            50px;
+
+        font-size:
+            18px;
+
+        border-radius:
+            18px;
+
+    }
+
+    .chapter-title {
+
+        font-size:
+            30px;
+
+        line-height:
+            1.35;
+
+        word-break:
+            keep-all;
+
+        margin-bottom:
+            30px;
+    }
+
+    .book-info-box {
+
+        padding:
+            28px 24px;
+
+        border-radius:
+            24px;
+
+    }
+
+    .book-info-title {
+
+        font-size:
+            20px;
+
+    }
+
+    .book-description {
+
+        font-size:
+            17px;
+
+        line-height:
+            1.9;
+
+    }
+
+    .chapter-item {
+
+        padding:
+            18px 8px;
+
+        font-size:
+            18px;
+
+    }
+
+    .back-library-btn,
+    .delete-book-btn {
+
+        width:
+            90px;
+
+        height:
+            52px;
+
+        font-size:
+            18px;
+
+    }
+
+    .add-btn {
+
+        width:
+            72px;
+
+        height:
+            72px;
+
+        font-size:
+            52px;
+
+        right:
+            20px;
+
+        bottom:
+            24px;
+
+    }
+
+}
+
+
+.chapter-title {
+
+    max-width:
+        100%;
+
+    overflow-wrap:
+        break-word;
+
+}
