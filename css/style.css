@@ -905,3 +905,23 @@ body {
         0 auto;
 
 }
+
+.back-library-btn,
+.delete-book-btn {
+
+    white-space:
+        nowrap;
+
+}
+
+@media (max-width: 768px) {
+
+    .back-library-btn,
+    .delete-book-btn {
+
+        width:
+            96px;
+
+    }
+
+}
