@@ -703,67 +703,42 @@ body {
 
 
 
-/* 모바일 최적화 */
+/* 모바일 */
 
 @media (max-width: 768px) {
 
     body {
 
         padding:
-            20px;
+            0;
 
     }
 
-    .book-card {
+    .chapter-page {
 
         padding:
-            20px 18px;
-
-        gap:
-            14px;
+            24px 20px 100px;
 
     }
 
-    .book-title {
+    .chapter-top {
 
-        font-size:
-            18px;
-
-        line-height:
-            1.4;
-
-        word-break:
-            keep-all;
-
-    }
-
-    .book-count {
-
-        font-size:
-            15px;
-
-    }
-
-    .drag-handle {
-
-        font-size:
+        margin-bottom:
             24px;
 
-        min-width:
-            28px;
-
     }
 
-    .library-delete-btn {
+    .back-library-btn,
+    .delete-book-btn {
 
         width:
-            74px;
+            84px;
 
         height:
-            50px;
+            46px;
 
         font-size:
-            18px;
+            17px;
 
         border-radius:
             18px;
@@ -773,97 +748,160 @@ body {
     .chapter-title {
 
         font-size:
-            30px;
+            28px;
 
         line-height:
-            1.35;
+            1.28;
+
+        letter-spacing:
+            -1px;
+
+        margin:
+            0 0 26px;
 
         word-break:
             keep-all;
 
-        margin-bottom:
-            30px;
     }
 
     .book-info-box {
 
         padding:
-            28px 24px;
+            26px 22px;
 
         border-radius:
-            24px;
+            22px;
+
+        margin-bottom:
+            28px;
 
     }
 
     .book-info-title {
 
         font-size:
-            20px;
+            18px;
+
+        margin-bottom:
+            18px;
 
     }
 
     .book-description {
 
         font-size:
-            17px;
+            16px;
 
         line-height:
-            1.9;
+            1.75;
+
+        color:
+            #555;
+    }
+
+    .chapter-list-title {
+
+        font-size:
+            18px;
+
+        margin-bottom:
+            12px;
 
     }
 
     .chapter-item {
 
         padding:
-            18px 8px;
+            18px 4px;
+
+        font-size:
+            17px;
+
+    }
+
+    .chapter-arrow {
 
         font-size:
             18px;
 
     }
 
-    .back-library-btn,
-    .delete-book-btn {
+    .book-card {
 
-        width:
-            90px;
+        padding:
+            18px 16px;
 
-        height:
-            52px;
+        border-radius:
+            24px;
+
+        gap:
+            14px;
+
+    }
+
+    .book-title {
 
         font-size:
-            18px;
+            17px;
+
+        line-height:
+            1.4;
+
+    }
+
+    .book-count {
+
+        font-size:
+            14px;
+
+    }
+
+    .drag-handle {
+
+        font-size:
+            22px;
+
+    }
+
+    .library-delete-btn {
+
+        width:
+            68px;
+
+        height:
+            46px;
+
+        font-size:
+            16px;
 
     }
 
     .add-btn {
 
         width:
-            72px;
+            70px;
 
         height:
-            72px;
-
-        font-size:
-            52px;
+            70px;
 
         right:
-            20px;
+            18px;
 
         bottom:
-            24px;
+            20px;
 
+        font-size:
+            48px;
     }
 
 }
 
-
-.chapter-title {
+.chapter-page {
 
     max-width:
-        100%;
+        720px;
 
-    overflow-wrap:
-        break-word;
+    margin:
+        0 auto;
 
 }
